@@ -47,29 +47,26 @@ const Sidebar = () => {
       <aside
         className={`
           fixed top-0 left-0 h-screen bg-white text-black shadow-lg z-20
-          transform transition-transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          md:relative md:translate-x-0 md:w-64 md:flex-shrink-0
-          w-64
+          transform transition-all duration-300 ease-in-out
+          ${isOpen ? "translate-x-0 w-64" : "-translate-x-full md:translate-x-0 md:w-20"}
+          md:relative
           flex flex-col
         `}
         style={{ maxHeight: "100vh" }}
       >
         <div className="p-6 text-2xl font-normal border-b border-gray-300 flex items-center gap-3">
-          {/* Toggle button only on desktop */}
-          {!isMobile && (
-            <button
-              onClick={toggleSidebar}
-              className="text-xl cursor-pointer focus:outline-none"
-              aria-label="Toggle sidebar"
-              title="Toggle sidebar"
-            >
-              <i className="ri-menu-fill"></i>
-            </button>
-          )}
+          {/* Toggle button - shown on both mobile and desktop */}
+          <button
+            onClick={toggleSidebar}
+            className="text-xl cursor-pointer focus:outline-none"
+            aria-label="Toggle sidebar"
+            title="Toggle sidebar"
+          >
+            <i className="ri-menu-fill"></i>
+          </button>
           <span
-            className={`transition-all duration-300 ${
-              isOpen ? "opacity-100" : "opacity-0 absolute"
+            className={`whitespace-nowrap transition-all duration-300 ${
+              isOpen ? "opacity-100 ml-0" : "opacity-0 ml-4 absolute"
             }`}
           >
             SLMS
@@ -90,8 +87,8 @@ const Sidebar = () => {
             >
               <i className={`${item.icon} text-lg`}></i>
               <span
-                className={`transition-all duration-300 ${
-                  isOpen ? "opacity-100" : "opacity-0 absolute"
+                className={`whitespace-nowrap transition-all duration-300 ${
+                  isOpen ? "opacity-100 ml-0" : "opacity-0 ml-4 absolute"
                 }`}
               >
                 {item.text}
@@ -104,8 +101,8 @@ const Sidebar = () => {
           <button className="flex items-center gap-3 w-full p-2 rounded hover:bg-gray-100 transition-colors duration-300 ease-in-out">
             <i className="ri-logout-box-line text-lg"></i>
             <span
-              className={`transition-all duration-300 ${
-                isOpen ? "opacity-100" : "opacity-0 absolute"
+              className={`whitespace-nowrap transition-all duration-300 ${
+                isOpen ? "opacity-100 ml-0" : "opacity-0 ml-4 absolute"
               }`}
             >
               Logout
