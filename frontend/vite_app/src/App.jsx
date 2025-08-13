@@ -1,24 +1,41 @@
-import { useState } from 'react';
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from '../src/Pages/Home';
-import Login from '../src/Pages/Login';
-import Register from '../src/Pages/Register';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Sidebar from "./Components/Sidebar";
+import HomePage from "./Pages/HomePage";
+import BorrowedBooksPage from "./Pages/BorrowedBooksPage";
+import PenaltiesPage from "./Pages/PenaltiesPage";
+import SearchPage from "./Pages/SearchPage";
+import LoginPage from "./Pages/Login";
+import RegisterPage from "./Pages/Register";
 
-function App() {
-  const [count, setCount] = useState(0);
+function AppLayout() {
+  const location = useLocation();
+  
+  // Hide sidebar for login and register
+  const hideSidebarRoutes = ["/login", "/register"];
+  const hideSidebar = hideSidebarRoutes.includes(location.pathname);
 
   return (
-    <Router>
-      <div className="div">
+    <div className="flex">
+      {!hideSidebar && <Sidebar />}
+      <div className={`flex-1 ${!hideSidebar ? "ml-0 md:ml-64 p-4" : ""}`}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/borrowed" element={<BorrowedBooksPage />} />
+          <Route path="/penalties" element={<PenaltiesPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <AppLayout />
+    </Router>
+  );
+}

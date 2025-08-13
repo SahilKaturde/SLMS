@@ -2,12 +2,12 @@ import React from 'react'
 import Sidebar from '../Components/Sidebar'
 import BookCard from '../Components/BookCard'
 
-function Home() {
+function SearchPage() {
   return (
     <div>
-      <Sidebar/>
+      <BookCard/>
     </div>
   )
 }
 
-export default Home
+export default SearchPage

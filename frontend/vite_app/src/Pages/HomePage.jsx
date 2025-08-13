@@ -1,13 +1,12 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar'
-import BookCard from '../Components/BookCard'
 
-function Home() {
+function HomePage() {
   return (
     <div>
-      <Sidebar/>
+     
     </div>
   )
 }
 
-export default Home
+export default HomePage

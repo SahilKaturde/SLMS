@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,58 +10,46 @@ const Sidebar = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       if (mobile) {
-        setIsOpen(false); // closed on mobile by default
+        setIsOpen(false);
       } else {
-        setIsOpen(true); // open on desktop by default
+        setIsOpen(true);
       }
     }
-    
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleSidebar = () => {
-    setIsOpen((prev) => !prev);
-  };
+  const toggleSidebar = () => setIsOpen((prev) => !prev);
+
+  const navItems = [
+    { icon: "ri-home-2-line", text: "Home", path: "/" },
+    { icon: "ri-book-2-line", text: "Borrowed Books", path: "/borrowed" },
+    { icon: "ri-alert-line", text: "Penalties & Notices", path: "/penalties" },
+    { icon: "ri-search-line", text: "Search", path: "/search" },
+  ];
 
   return (
     <div className="flex font-mono">
-      {/* Small green dot toggle button on mobile */}
       {isMobile && (
         <button
           onClick={toggleSidebar}
-          className={`
-            fixed top-4 left-4 z-30
-            w-4 h-4 rounded-full
-            ${isOpen ? "bg-green-600" : "bg-green-400"}
-            shadow-lg
-            focus:outline-none
-            transition-colors duration-300
-          `}
-          aria-label="Toggle sidebar"
-          title={isOpen ? "Close menu" : "Open menu"}
+          className={`fixed top-4 left-4 z-30 w-4 h-4 rounded-full ${
+            isOpen ? "bg-green-600" : "bg-green-400"
+          } shadow-lg focus:outline-none transition-colors duration-300`}
         />
       )}
 
-      {/* Sidebar */}
       <aside
-        className={`
-          fixed top-0 left-0 h-screen bg-white text-black shadow-lg z-20
-          transform transition-all duration-300 ease-in-out
+        className={`fixed top-0 left-0 h-screen bg-white text-black shadow-lg z-20 transform transition-all duration-300 ease-in-out
           ${isOpen ? "translate-x-0 w-64" : "-translate-x-full md:translate-x-0 md:w-20"}
-          md:relative
-          flex flex-col
-        `}
+          md:relative flex flex-col`}
         style={{ maxHeight: "100vh" }}
       >
         <div className="p-6 text-2xl font-normal border-b border-gray-300 flex items-center gap-3">
-          {/* Toggle button - shown on both mobile and desktop */}
           <button
             onClick={toggleSidebar}
             className="text-xl cursor-pointer focus:outline-none"
-            aria-label="Toggle sidebar"
-            title="Toggle sidebar"
           >
             <i className="ri-menu-fill"></i>
           </button>
@@ -73,16 +62,11 @@ const Sidebar = () => {
           </span>
         </div>
 
-        {/* Scrollable navigation */}
         <nav className="flex-1 p-4 space-y-4 overflow-y-auto">
-          {[
-            { icon: "ri-home-2-line", text: "Home" },
-            { icon: "ri-book-2-line", text: "Borrowed Books" },
-            { icon: "ri-alert-line", text: "Penalties & Notices" },
-          ].map((item) => (
-            <a
+          {navItems.map((item) => (
+            <Link
               key={item.text}
-              href="#"
+              to={item.path}
               className="flex items-center gap-3 p-2 rounded hover:bg-gray-100 transition-colors duration-300 ease-in-out"
             >
               <i className={`${item.icon} text-lg`}></i>
@@ -93,7 +77,7 @@ const Sidebar = () => {
               >
                 {item.text}
               </span>
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -111,7 +95,6 @@ const Sidebar = () => {
         </div>
       </aside>
 
-      {/* Overlay for mobile when sidebar is open */}
       {isOpen && isMobile && (
         <div
           className="fixed inset-0 bg-black opacity-30 z-10 md:hidden"
