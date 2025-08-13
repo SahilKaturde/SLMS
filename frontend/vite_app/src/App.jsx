@@ -23,7 +23,6 @@ function AppLayout() {
           <Route path="/" element={<HomePage />} />
           <Route path="/borrowed" element={<BorrowedBooksPage />} />
           <Route path="/penalties" element={<PenaltiesPage />} />
-          <Route path="/search" element={<SearchPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

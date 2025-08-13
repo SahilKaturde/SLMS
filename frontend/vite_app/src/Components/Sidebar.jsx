@@ -26,7 +26,6 @@ const Sidebar = () => {
     { icon: "ri-home-2-line", text: "Home", path: "/" },
     { icon: "ri-book-2-line", text: "Borrowed Books", path: "/borrowed" },
     { icon: "ri-alert-line", text: "Penalties & Notices", path: "/penalties" },
-    { icon: "ri-search-line", text: "Search", path: "/search" },
   ];
 
   return (
