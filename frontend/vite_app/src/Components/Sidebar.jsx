@@ -26,6 +26,7 @@ const Sidebar = () => {
     { icon: "ri-home-2-line", text: "Home", path: "/" },
     { icon: "ri-book-2-line", text: "Borrowed Books", path: "/borrowed" },
     { icon: "ri-alert-line", text: "Penalties & Notices", path: "/penalties" },
+    { icon: "ri-book-open-line", text: "Read Online", path: "/read-online" }, // ✅ Added here
   ];
 
   return (
@@ -81,16 +82,19 @@ const Sidebar = () => {
         </nav>
 
         <div className="p-4 border-t border-gray-300">
-          <button className="flex items-center gap-3 w-full p-2 rounded hover:bg-gray-100 transition-colors duration-300 ease-in-out">
-            <i className="ri-logout-box-line text-lg"></i>
+          <Link
+            to="/profile"
+            className="flex items-center gap-3 w-full p-2 rounded hover:bg-gray-100 transition-colors duration-300 ease-in-out"
+          >
+            <i className="ri-user-line text-lg"></i>
             <span
               className={`whitespace-nowrap transition-all duration-300 ${
                 isOpen ? "opacity-100 ml-0" : "opacity-0 ml-4 absolute"
               }`}
             >
-              Logout
+              Profile
             </span>
-          </button>
+          </Link>
         </div>
       </aside>
 
